@@ -1,3 +1,5 @@
-alias c='g++ -Wall -Wconversion -Wfatal-errors -g -std=c++17 \
-	-fsanitize=undefined,address'
-xmodmap -e 'clear lock' -e 'keycode 66=less greater' #caps = <>
+alias c='g++ -O2 -g -std=c++17 -Wall -Wextra -Wconversion -Wfatal-errors -fsanitize=undefined,address'
+function cr(){
+    exe=${1%.*}
+    make $exe && echo compiled && time ./$exe
+}
