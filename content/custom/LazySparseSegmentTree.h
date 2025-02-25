@@ -3,7 +3,7 @@
  * Date: 2025-1-14
  * License: CC0
  * Source: me
- * Description: UPDATED min lazy sparse segment tree, substract value range query can be changed easily
+ * Description: min lazy sparse segment tree, substract value range query can be changed easily
  * Time: O(\log N).
  * Usage: Node* it = new Node(n, fill); add export ASAN_OPTIONS=detect_leaks=0 to .bashrc
  * Status: some simple tasks on cses and testovac/ksp

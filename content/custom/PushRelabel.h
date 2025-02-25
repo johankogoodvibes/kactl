@@ -7,7 +7,7 @@
  *  To obtain the actual flow, look at positive values only in g (.f). Edges are directed add both for undirected
  * Time: $O(V^2\sqrt E)$
  * Usage: flow.addEdge(a, b, c); flow.calc(s, t);
- * Status: Tested SPOJ
+ * Status: Tested SPOJ, dmoj
  */
 #pragma once
 

@@ -3,23 +3,24 @@
  * Date: 2025-01-20
  * License: CC0
  * Source: myself
- * Description: Computes minimal and maximal flow in graph g from s to t.
- *  Minimal flow is more time consuming. Not optimized for running time
- * Time: maxflow $O(1)$ minflow $O(log F)$ times flow 
+ * Description: Computes minimal and maximal flow in graph g from s to t. Not optimized running time.
+ *  Might want to use PushRelabel if it is slow, take care with maxflow then.
+ * Time: $O(1)$ runs of flow 
  * Usage: g is vector<vector<dest, <min, max>>>
- * Status: Tested DMOJ squirrels
+ * Status: Tested DMOJ squirrels, cf captain america, need to test least flow calculation
  */
 #pragma once
 
-#include "PushRelabel.h"
+#include "Dinic.h"
 
 pll lowerBoundFlow(vec<vec<pair<ll, pll>>>&g, ll s, ll t){
     ll n = sz(g);
     ll ns = n, nt = n+1;
-    PushRelabel base = PushRelabel(n + 2);
+    Dinic base = Dinic(n + 2);
     vec<ll> O(n), I(n);
     For(i, 0, n){
         for(auto [to, c]:g[i]){
+            assert(c.first <= c.second); // no feasible flow
             O[i] += c.first;
             I[to] += c.first;
             base.addEdge(i, to, c.second - c.first);
@@ -31,35 +32,10 @@ pll lowerBoundFlow(vec<vec<pair<ll, pll>>>&g, ll s, ll t){
         base.addEdge(ns, i, I[i]);
         base.addEdge(i, nt, O[i]);
     }
-    PushRelabel flow1 = base;
-    flow1.addEdge(t, s, inf);
-    
+    Dinic flow1 = base;
+    flow1.addEdge(t, s, inf);    
     assert(flow1.calc(ns, nt) == bound_sum); // no feasible flow
-    
-    // this is for max possible flow
-    map<pll, ll> flows;
-    For(i, 0, sz(flow1.g)){
-        for(auto e:flow1.g[i]){
-            flows[{i, e.dest}] = e.f;            
-        }
-    }
-    PushRelabel flow2 = PushRelabel(n);
-    For(i, 0, n){
-        for(auto [to, c]:g[i]){
-            flow2.addEdge(i, to, c.second - c.first - flows[{i, to}], flows[{i, to}]);
-        }
-    }
-    ll most = flow2.calc(s, t) + flows[{t, s}];
-
-    // this is for min possible flow
-    ll lo = -1, hi = inf;
-    while(hi-lo>1){
-        ll mid = (lo + hi)/2;
-        PushRelabel flow3 = base;
-        flow3.addEdge(t, s, mid);
-        if(flow3.calc(ns, nt)<bound_sum)lo = mid;
-        else hi = mid;
-    }
-    ll least = lo + 1;
+    ll most = flow1.calc(s, t);
+    Dinic flow3 = base; ll least = bound_sum - flow3.calc(ns, nt);
     return {least, most};
 }

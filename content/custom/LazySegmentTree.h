@@ -3,7 +3,7 @@
  * Date: 2025-1-14
  * License: CC0
  * Source: me
- * Description: UPDATED min segment tree, substract value query can be changed easily
+ * Description: min segment tree, substract value query can be changed easily
  * Time: O(\log N).
  * Usage: vec<ll>a; intervalac it = intervalac(a);
  * Status: some simple tasks on cses and testovac/ksp

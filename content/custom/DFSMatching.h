@@ -3,7 +3,7 @@
  * Date: 2025-1-3
  * License: CC0
  * Source:
- * Description: UPDATED g is of size $|A|$, contains neighbors in B (numbers in $0,...,|B|$) 
+ * Description: g is of size $|A|$, contains neighbors in B (numbers in $0,...,|B|$) 
  * $btoa$ should be a vector full of -1's of size $|B|$. Returns the size of
  * the matching. $btoa[i]$ will be the match for vertex $i$ on the right side,
  * or $-1$ if it's not matched.

@@ -3,7 +3,7 @@
  * Date: 2025-1-14
  * License: CC0
  * Source: n/a
- * Description: UPDATED minimum segment tree with point set update
+ * Description: minimum segment tree with point set update
  * can be modified easily
  * Time: O(\log N)
  * Usage: vec<ll>a; intervalac it = intervalac(a);
